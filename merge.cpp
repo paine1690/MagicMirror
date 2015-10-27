@@ -32,6 +32,11 @@ void MergeArray(int a[], int first, int mid, int last, int temp[])
 	while(j<=last){
 		temp[k++] = a[j++];
 	}
+	//回写 
+	for(int i=0; i<k; i++){
+		a[i] = temp[i];
+	}
+	
 }
 
 void MergeStep(int a[], int step, int len, int temp[])//根据步长将len长度的 
@@ -39,7 +44,7 @@ void MergeStep(int a[], int step, int len, int temp[])//根据步长将len长度的
 	int first, mid, last;
 	first = 0;
 	last =  first + step + step -1;
-	cout<<"+"<<last<<endl;
+	
 	mid = first + step -1;
 	
 	while(last<len){
@@ -51,7 +56,7 @@ void MergeStep(int a[], int step, int len, int temp[])//根据步长将len长度的
 	
 	if(mid>len){//剩余元素已经有序 
 		for(int i=first; i<len; i++){
-			cout<<"i:"<<i<<endl;
+			
 			temp[i] = a[i];
 		}
 	}
@@ -59,23 +64,21 @@ void MergeStep(int a[], int step, int len, int temp[])//根据步长将len长度的
 		MergeArray(a, first, mid, len-1, temp);
 	}
 	
-	print(temp, 14, 14);
+
 }
 
 
-void MergeSort(int a[], int len)
+void MergeSort(int a[], int len, int temp[])
 {
 	int flag = 0;//
 	//int *temp = (int*) malloc(len * sizeof(int));
-	int *temp = new int[len];	 
-	
+	//int *temp = new int[len];	 
+
 	for(int step=1; step<len; step=step<<1){
 		if(flag++ %2){//
-			cout<<"step:"<<step<<endl;
 			MergeStep(temp, step, len, a);
 		}
 		else{//
-			cout<<"step:"<<step<<endl;
 			MergeStep(a, step, len, temp);
 		}
 	}
@@ -84,16 +87,127 @@ void MergeSort(int a[], int len)
 			a[i] = temp[i];
 		}
 	}
-	//free(temp);
-	delete [] temp;
+
 }	
+
+
+
+//求A-B并B-A 
+void A_B(int a[], int m, int b[], int n, int c[])
+{
+	int i=0;
+	int j=0;
+	int k=0;
+	while(i<m && j<n){
+		if(a[i]<b[j]){
+			c[k++] = a[i++];
+		}
+		else if(a[i]>b[j]){
+			c[k++] = b[j++];
+		}
+		else{
+			i++;
+			j++;
+		}
+	}
+	while(i<m){
+		c[k++] = a[i++];
+	}
+	
+	while(j<n){
+		c[k++] = b[j++];
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void MergeStep2(int a[], int n, int b[], int j, int temp[])
+{
+	int first,mid,last,step;
+	print(b,j,j);	
+	cout<<"b[j]"<<b[j-1]<<endl;
+	
+	for(int step=1; step<n/2; step=step*2){
+		first = 0;
+		mid = step-1;
+		last = mid+step;
+		cout<<"last:"<<last<<endl;
+		
+		while(last<=j-1){
+			cout<<"first"<<first<<"mid"<<b[mid]<<"last"<<b[last]<<endl;
+			MergeArray(a, first, b[mid], b[last], temp);
+			first = b[last] + 1;
+			mid = last+step;
+			last = mid+step;
+			cout<<"first"<<first<<"mid"<<b[mid]<<"last"<<b[last]<<endl;
+			cout<<"last::"<<last<<endl;
+		} 
+		if(mid<=j-1){
+			MergeArray(a, first, b[mid], n-1, temp);
+		}
+		
+		print(a,15,15);
+	}
+	print(a,15,15);
+}
+
+void MergeSort2(int a[], int n, int b[], int temp[])
+{
+	int j=0;
+	for(int i=0; i<n-1; i++){
+		if(a[i]>a[i+1]){
+			b[j++]=i;
+		}
+	}
+	print(b,j,j);	
+	MergeStep2(a, n, b, j, temp);
+} 
+
+
 
 
 int main()
 {
-	int arr[14] = { 213, 67, 89, 10, 23, 9, 23, 45, 12, 456, 234, 67, 12, 0 };  
-	print(arr, 14, 14);
-	MergeSort(arr, 14);
-	print(arr, 14, 14);
-	
+	int a[15] = {45,32,54,12,43,65,11,3,43,6,33,90,44,1,178};
+	//int a[10] = { 10,2,3,4,5,6,9,8,7,1 };
+	int b[15];
+	int temp[15];
+//	MergeSort(a, 14, temp);
+//	MergeSort(b, 5, temp);
+//	A_B(a, 14, b, 5, c);
+//	print(a, 14, 14);
+//	print(b, 5, 5);
+//	print(c, 17, 17);
+	MergeSort2(a, 15, b, temp);
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
