@@ -32,7 +32,7 @@ void insertSort(int a[], int n)
 //2¡¢Ï£¶ûÅÅĞò 
 void shellInsertSort(int a[], int n, int dk)
 {
-	for(int i=dk; i<n; i++)
+	for(int i=dk; i<=n; i++)
 	{	
 		if(a[i] < a[i-dk])
 		{
@@ -61,8 +61,8 @@ void shellSort(int a[], int n)
 
 int main()
 {
-	int a[6] = {6,17,7,8,45,9};
-	//insertSort(a, 6);
-	shellSort(a, 6);
-	print(a,6);
+	int a[7] = {6,17,7,8,45,9,6};
+	insertSort(a, 7);
+	//shellSort(a, 6);
+	print(a,7);
 }
