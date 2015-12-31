@@ -11,6 +11,10 @@ void print(int a[], int n, int i)
 	cout<<endl;
 }
 
+
+/************
+改进，无回写 
+************/
 void MergeArray(int a[], int first, int mid, int last, int temp[])
 {
 	int i = first;
@@ -32,10 +36,7 @@ void MergeArray(int a[], int first, int mid, int last, int temp[])
 	while(j<=last){
 		temp[k++] = a[j++];
 	}
-	//回写 
-	for(int i=0; i<k; i++){
-		a[i] = temp[i];
-	}
+
 	
 }
 
@@ -92,7 +93,9 @@ void MergeSort(int a[], int len, int temp[])
 
 
 
-//求A-B并B-A 
+/*********
+求A-B并B-A 
+*********/ 
 void A_B(int a[], int m, int b[], int n, int c[])
 {
 	int i=0;
@@ -120,19 +123,9 @@ void A_B(int a[], int m, int b[], int n, int c[])
 	
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*****************
+改进，无逆序子序列 
+*****************/ 
 
 void MergeStep2(int a[], int n, int b[], int j, int temp[])
 {
@@ -185,13 +178,14 @@ int main()
 	//int a[10] = { 10,2,3,4,5,6,9,8,7,1 };
 	int b[15];
 	int temp[15];
-//	MergeSort(a, 14, temp);
+	MergeSort(a, 14, temp);
 //	MergeSort(b, 5, temp);
 //	A_B(a, 14, b, 5, c);
 //	print(a, 14, 14);
 //	print(b, 5, 5);
 //	print(c, 17, 17);
-	MergeSort2(a, 15, b, temp);
+	//MergeSort2(a, 15, b, temp);
+	print(a,15,15);
 } 
 
 
