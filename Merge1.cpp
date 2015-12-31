@@ -33,8 +33,8 @@ void mergeArray(int a[], int first, int mid, int last, int temp[])
 		temp[k++]=a[j++];
 	}
 	
-	for(int i=first; i<=last; i++){
-		a[i]=temp[i];
+	for(int i=0; i<k; i++){
+		a[first+i]=temp[first+i];
 	}
 }
 
