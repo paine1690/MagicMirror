@@ -9,6 +9,6 @@ def GetNowTime():
     return time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
 
 def home(request):
-    string = u"lla";
-    time = GetNowTime();
+    string = u"home";
+    print(string);
     return render(request, 'home.html', {'time': time});
