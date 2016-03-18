@@ -1,0 +1,16 @@
+﻿@charset "utf-8";
+*{margin:0;padding:0;}
+
+.blackBody{ 
+background:#000; color:#FFF
+} 
+.clock{ 
+position:fixed;
+left:50px;
+top:50px;
+}
+.weather{
+position:fixed;
+right:10px;
+top:50px;
+}
