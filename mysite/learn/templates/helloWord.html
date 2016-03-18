@@ -1,0 +1,21 @@
+
+<div class="helloWord">
+	<p id="helloWord" style="font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,'New York', serif;">欢迎！</p>
+</div>
+<script> 
+var i=0;
+function hello(){ 
+	var arrs=["早上好",
+	"中午好",
+	"晚上好",
+	];
+	document.getElementById("helloWord").innerText=arrs[i];
+	i++;
+	if(i==arrs.length){
+		i=0;
+	}
+} 
+var t1 = window.setInterval(hello,10000); 
+//去掉定时器的方法 
+//window.clearInterval(t1); 
+</script> 

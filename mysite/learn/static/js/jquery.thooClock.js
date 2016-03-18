@@ -184,8 +184,6 @@
                     ctx.beginPath();
                     ctx.strokeStyle = color;
                     ctx.lineCap = "round";
-                    ctx.moveTo(sx,sy);
-                    ctx.lineTo(ex,ey);
                     ctx.stroke();
                 } 
 
@@ -223,7 +221,7 @@
             
 
             function drawSecondHand(seconds, color){
-                var shlength = (radius)-(el.size/40);
+                var shlength = (radius)-(el.size/08);
                 
                 ctx.save();
                 ctx.lineWidth = parseInt(el.size/150,10);
@@ -255,7 +253,7 @@
             }
 
             function drawMinuteHand(minutes, color){
-                var mhlength = el.size/2.2;
+                var mhlength = el.size/3.2;
                 ctx.save();
                 ctx.lineWidth = parseInt(el.size/50,10);
                 ctx.lineCap = "round";
@@ -272,9 +270,9 @@
             }
 
             function drawHourHand(hours, color){
-                var hhlength = el.size/3;
+                var hhlength = el.size/4.5;
                 ctx.save();
-                ctx.lineWidth = parseInt(el.size/25, 10);
+                ctx.lineWidth = parseInt(el.size/35, 10);
                 ctx.lineCap = "round";
                 ctx.strokeStyle = color;
                 ctx.rotate( toRadians(hours * 30));

@@ -9,8 +9,15 @@ position:fixed;
 left:50px;
 top:50px;
 }
+
 .weather{
 position:fixed;
 right:10px;
 top:50px;
+}
+
+.helloWord{
+position:fixed;
+right:50%;
+bottom:5px;
 }
