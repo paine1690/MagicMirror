@@ -100,7 +100,8 @@ weather.updateCurrentWeather = function () {
 
 		}.bind(this),
 		error: function () {
-			alert("weather error");
+			var _loading = '<span >loading</span>';
+			$(this.temperatureLocation).updateWithText(_loading, this.fadeInterval);
 		}
 	});
 
