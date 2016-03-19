@@ -6,20 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/weather.css">
 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <title>{% block title %}默认标题{% endblock %}</title>
 </head>
+
 <body class="blackBody">
-
-{% block content %}
-<div>这里是默认内容，所有继承自这个模板的，如果不覆盖就显示这里的默认内容。</div>
-{% endblock %}
-
 {% include 'clock.html' %}
 {% include 'weather.html' %}
 {% include 'helloWord.html' %}
-
-
-
-
 </body>
+<script src="{{STATIC_URL}}js/main.js"></script>
+
 </html>

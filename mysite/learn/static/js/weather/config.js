@@ -16,25 +16,7 @@ var config = {
             APPID: '4038dd9ebf114269a52984197cbdeb7a'
         }
     },
-    compliments: {
-        interval: 30000,
-        fadeInterval: 4000,
-        morning: [
-            'Good morning, handsome!',
-            'Enjoy your day!',
-            'How was your sleep?'
-        ],
-        afternoon: [
-            'Hello, beauty!',
-            'You look sexy!',
-            'Looking good today!'
-        ],
-        evening: [
-            'Wow, you look hot!',
-            'You look nice!',
-            'Hi, sexy!'
-        ]
-    },
+    
     calendar: {
         maximumEntries: 10, // Total Maximum Entries
 		displaySymbol: true,
