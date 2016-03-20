@@ -8,5 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$','learn.views.home', name='home'),
+	url(r'^mirror','learn.views.home', name='home'),
+	url(r'^pictrue','learn.views.pictrue'),
     url(r'^admin/', include(admin.site.urls)),
 )

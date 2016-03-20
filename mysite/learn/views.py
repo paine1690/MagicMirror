@@ -12,3 +12,9 @@ def home(request):
     string = u"home";
     print(string);
     return render(request, 'home.html', {'time': time});
+	
+
+def pictrue(request):
+    string = u"pictrue";
+    print(string);
+    return render(request, 'pictrue.html');
