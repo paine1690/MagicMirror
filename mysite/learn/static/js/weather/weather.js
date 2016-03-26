@@ -161,14 +161,12 @@ weather.updateWeatherForecast = function () {
 
 		}.bind(this),
 		error: function () {
-			alert("error");
 		}
 	});
 
 }
 
 weather.init = function () {
-
 	if (this.params.lang === undefined) {
 		this.params.lang = this.lang;
 	}
@@ -179,8 +177,9 @@ weather.init = function () {
 
 	this.intervalId = setInterval(function () {
 		this.updateCurrentWeather();
-		
+		//this.updateWeatherForecast();
 	}.bind(this), this.updateInterval);
-	this.updateCurrentWeather();
+	//this.updateCurrentWeather();
+	this.updateWeatherForecast();
 	
 }
