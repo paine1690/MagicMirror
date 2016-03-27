@@ -1,0 +1,23 @@
+<div class="top right">
+	<div id="test">1234324</div>
+	<div ></div>
+	<div ></div>
+</div>
+
+
+<script>
+	$(document).ready(function(){
+     
+        var a = $("#a").val();
+        var b = $("#b").val();
+ 
+        $.get("/polling/",{'a':a,'b':b}, function(ret){
+			alert(ret);
+            $('#test').html(ret)
+        })
+      
+    });
+
+
+
+</script>

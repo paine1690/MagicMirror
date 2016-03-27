@@ -26,7 +26,7 @@ var weather = {
 		'Mostly Sunny':'wi-day-sunny',
 		'Sunny':'wi-day-sunny',
 		'Mostly Cloudy':'wi-cloudy',
-		'Partly Cloudy':'wi-day-cloudy',
+		'Partly Cloudy':'wi-night-cloudy',
 		'Cloudy':'wi-day-cloudy',
 		
 		'Rain And Snow':'wi-snow',
@@ -155,8 +155,8 @@ weather.updateWeatherForecast = function () {
 				
 				_forecastHtml += '<td style="opacity:' + _opacity + '" class="day">' + _forecast.day + '</td>';
 				_forecastHtml2 += '<td style="opacity:' + _opacity + '" class="icon-small ' + this.iconTable[_forecast.text] + '"></td>';
-				_forecastHtml3 += '<td style="opacity:' + _opacity + '" class="temp-max">' + this.roundValue((_forecast.high-32)/1.8) + '</td>';
-				_forecastHtml4 += '<td style="opacity:' + _opacity + '" class="temp-min">' + this.roundValue((_forecast.low-32)/1.8) + '</td>';
+				_forecastHtml3 += '<td style="opacity:' + _opacity + '" class="temp-max">' + this.roundValue(_forecast.high) + '</td>';
+				_forecastHtml4 += '<td style="opacity:' + _opacity + '" class="temp-min">' + this.roundValue(_forecast.low) + '</td>';
 
 				_opacity -= 0.103;
 
