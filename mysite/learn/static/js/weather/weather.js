@@ -20,7 +20,21 @@ var weather = {
 		'10n':'wi-night-rain',
 		'11n':'wi-night-thunderstorm',
 		'13n':'wi-night-snow',
-		'50n':'wi-night-alt-cloudy-windy'
+		'50n':'wi-night-alt-cloudy-windy',
+		
+		
+		
+		'Sunny':'wi-day-sunny',
+		'Mostly Cloudy':'wi-cloudy',
+		'Partly Cloudy':'wi-day-cloudy',
+		'Cloudy':'wi-day-cloudy',
+		
+		'Rain And Snow':'wi-snow',
+		
+		'Breezy':'wi-windy',
+		
+		
+		
 	},
 	temperatureLocation: '.temp',
 	windSunLocation: '.windsun',
@@ -73,6 +87,8 @@ weather.updateCurrentWeather = function () {
 		dataType: 'json',
 		data: weather.params,
 		success: function (data) {
+
+			
 			var _temperature = this.roundValue(data.main.temp),
 				_temperatureMin = this.roundValue(data.main.temp_min),
 				_temperatureMax = this.roundValue(data.main.temp_max),
@@ -114,10 +130,10 @@ weather.updateWeatherForecast = function () {
 
 	$.ajax({
 		type: 'GET',
-		url: weather.apiBase + '/' + weather.apiVersion + '/' + weather.forecastEndpoint,
+		//url: weather.apiBase + '/' + weather.apiVersion + '/' + weather.forecastEndpoint,
+		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
 		data: weather.params,
 		success: function (data) {
-
 			var _opacity = 1,
 				_forecastHtml = '<tr>',
 				_forecastHtml2 = '<tr>',
@@ -126,9 +142,9 @@ weather.updateWeatherForecast = function () {
 
 			_forecastHtml = '<table class="forecast-table"><tr>';
 
-			for (var i = 0, count = data.list.length; i < count; i++) {
+			for (var i = 1, count = data.query.results.channel.item.forecast.length; i < count; i++) {
 
-				var _forecast = data.list[i];
+				var _forecast = data.query.results.channel.item.forecast[i];
 				
 				if (this.orientation == 'vertical') {
 					_forecastHtml2 = '';
@@ -136,11 +152,13 @@ weather.updateWeatherForecast = function () {
 					_forecastHtml4 = '';
 				}
 
-				_forecastHtml += '<td style="opacity:' + _opacity + '" class="day">' + moment(_forecast.dt, 'X').format('ddd') + '</td>';
-				_forecastHtml2 += '<td style="opacity:' + _opacity + '" class="icon-small ' + this.iconTable[_forecast.weather[0].icon] + '"></td>';
 				
+				_forecastHtml += '<td style="opacity:' + _opacity + '" class="day">' + _forecast.day + '</td>';
+				_forecastHtml2 += '<td style="opacity:' + _opacity + '" class="icon-small ' + this.iconTable[_forecast.text] + '"></td>';
+				_forecastHtml3 += '<td style="opacity:' + _opacity + '" class="temp-max">' + this.roundValue(_forecast.high) + '</td>';
+				_forecastHtml4 += '<td style="opacity:' + _opacity + '" class="temp-min">' + this.roundValue(_forecast.low) + '</td>';
 
-				_opacity -= 0.155;
+				_opacity -= 0.103;
 
 				if (this.orientation == 'vertical') {
 					_forecastHtml += _forecastHtml2 + _forecastHtml3 + _forecastHtml4 + '</tr>';
@@ -177,9 +195,9 @@ weather.init = function () {
 
 	this.intervalId = setInterval(function () {
 		this.updateCurrentWeather();
-		//this.updateWeatherForecast();
+		this.updateWeatherForecast();
 	}.bind(this), this.updateInterval);
-	//this.updateCurrentWeather();
+	this.updateCurrentWeather();
 	this.updateWeatherForecast();
 	
 }
