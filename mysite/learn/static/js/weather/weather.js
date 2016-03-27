@@ -23,14 +23,14 @@ var weather = {
 		'50n':'wi-night-alt-cloudy-windy',
 		
 		
-		
+		'Mostly Sunny':'wi-day-sunny',
 		'Sunny':'wi-day-sunny',
 		'Mostly Cloudy':'wi-cloudy',
 		'Partly Cloudy':'wi-day-cloudy',
 		'Cloudy':'wi-day-cloudy',
 		
 		'Rain And Snow':'wi-snow',
-		
+		'Scattered Showers':'wi-day-showers',
 		'Breezy':'wi-windy',
 		
 		
@@ -131,7 +131,7 @@ weather.updateWeatherForecast = function () {
 	$.ajax({
 		type: 'GET',
 		//url: weather.apiBase + '/' + weather.apiVersion + '/' + weather.forecastEndpoint,
-		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22dalian%2C%20cn%22)&u=c&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
 		data: weather.params,
 		success: function (data) {
 			var _opacity = 1,
@@ -155,8 +155,8 @@ weather.updateWeatherForecast = function () {
 				
 				_forecastHtml += '<td style="opacity:' + _opacity + '" class="day">' + _forecast.day + '</td>';
 				_forecastHtml2 += '<td style="opacity:' + _opacity + '" class="icon-small ' + this.iconTable[_forecast.text] + '"></td>';
-				_forecastHtml3 += '<td style="opacity:' + _opacity + '" class="temp-max">' + this.roundValue(_forecast.high) + '</td>';
-				_forecastHtml4 += '<td style="opacity:' + _opacity + '" class="temp-min">' + this.roundValue(_forecast.low) + '</td>';
+				_forecastHtml3 += '<td style="opacity:' + _opacity + '" class="temp-max">' + this.roundValue((_forecast.high-32)/1.8) + '</td>';
+				_forecastHtml4 += '<td style="opacity:' + _opacity + '" class="temp-min">' + this.roundValue((_forecast.low-32)/1.8) + '</td>';
 
 				_opacity -= 0.103;
 
