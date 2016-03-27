@@ -47,6 +47,7 @@ jQuery(document).ready(function($) {
 
 	compliments.init();
 	weather.init();
+	polling.init();
 
 
 });

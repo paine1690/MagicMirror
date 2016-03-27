@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import time
 
-int1=0;
+i=0;
 def GetNowTime():
     return time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
 
@@ -21,12 +21,10 @@ def pictrue(request):
 
 
 def polling(request):
-    string = u"polling";
+    #string = u"polling";
+    string=GetNowTime();
     print(string);
-    i=+1;
-    if i%2 ==0:
-        return HttpResponse("ji");	
-    else:
-        return HttpResponse("ou");	
+    return HttpResponse(string);	
+    	
     
 	
