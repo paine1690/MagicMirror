@@ -1,5 +1,5 @@
 var config = {
-    lang: 'nl',
+    lang: 'ch-cn',
     time: {
         timeFormat: 12,
         displaySeconds: true,

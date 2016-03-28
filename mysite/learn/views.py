@@ -26,7 +26,7 @@ def polling(request):
     string=GetNowTime();
     result = {
         'time': string,
-        'mode': 2,
+        'mode': 1,
 	}
     print(string);
     return HttpResponse(json.dumps(result), content_type='application/json');	

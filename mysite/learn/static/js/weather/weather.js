@@ -43,7 +43,7 @@ var weather = {
 	apiBase: 'http://api.openweathermap.org/data/',
 	weatherEndpoint: 'weather',
 	forecastEndpoint: 'forecast/',
-	updateInterval: 60000,
+	updateInterval: 2000,
 	fadeInterval: config.weather.fadeInterval || 1000,
 	intervalId: null,
 	orientation: config.weather.orientation || 'vertical',
@@ -130,10 +130,10 @@ weather.updateWeatherForecast = function () {
 
 	$.ajax({
 		type: 'GET',
-		//url: weather.apiBase + '/' + weather.apiVersion + '/' + weather.forecastEndpoint,
-		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22dalian%2C%20cn%22)&u=c&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+		url: weather.apiBase + '/' + weather.apiVersion + '/' + weather.forecastEndpoint,
 		data: weather.params,
 		success: function (data) {
+
 			var _opacity = 1,
 				_forecastHtml = '<tr>',
 				_forecastHtml2 = '<tr>',
@@ -142,23 +142,26 @@ weather.updateWeatherForecast = function () {
 
 			_forecastHtml = '<table class="forecast-table"><tr>';
 
-			for (var i = 1, count = data.query.results.channel.item.forecast.length; i < count; i++) {
+			for (var i = 0, count = data.list.length; i < count; i+=8) {
 
-				var _forecast = data.query.results.channel.item.forecast[i];
-				
+				var _forecast = data.list[i];
+
+				//don't show yesterday's forecast; each date, .dt is 12p local;
+				var _12hours = 60 * 60 * 12 * 1000;
+				if (_forecast.dt < Math.floor((Date.now() - _12hours) / 1000)) continue;
+
 				if (this.orientation == 'vertical') {
 					_forecastHtml2 = '';
 					_forecastHtml3 = '';
 					_forecastHtml4 = '';
 				}
 
-				
-				_forecastHtml += '<td style="opacity:' + _opacity + '" class="day">' + _forecast.day + '</td>';
-				_forecastHtml2 += '<td style="opacity:' + _opacity + '" class="icon-small ' + this.iconTable[_forecast.text] + '"></td>';
-				_forecastHtml3 += '<td style="opacity:' + _opacity + '" class="temp-max">' + this.roundValue(_forecast.high) + '</td>';
-				_forecastHtml4 += '<td style="opacity:' + _opacity + '" class="temp-min">' + this.roundValue(_forecast.low) + '</td>';
+				_forecastHtml += '<td style="opacity:' + _opacity + '" class="day">' + moment(_forecast.dt, 'X').format('ddd') + '</td>';
+				_forecastHtml2 += '<td style="opacity:' + _opacity + '" class="icon-small ' + this.iconTable[_forecast.weather[0].icon] + '"></td>';
+				_forecastHtml3 += '<td style="opacity:' + _opacity + '" class="temp-max">' + this.roundValue(_forecast.main.temp_max) + '</td>';
+				_forecastHtml4 += '<td style="opacity:' + _opacity + '" class="temp-min">' + this.roundValue(_forecast.main.temp_min) + '</td>';
 
-				_opacity -= 0.103;
+				_opacity -= 0.155;
 
 				if (this.orientation == 'vertical') {
 					_forecastHtml += _forecastHtml2 + _forecastHtml3 + _forecastHtml4 + '</tr>';
@@ -179,6 +182,7 @@ weather.updateWeatherForecast = function () {
 
 		}.bind(this),
 		error: function () {
+
 		}
 	});
 
@@ -195,9 +199,9 @@ weather.init = function () {
 
 	this.intervalId = setInterval(function () {
 		this.updateCurrentWeather();
-		this.updateWeatherForecast();
+		//this.updateWeatherForecast();
 	}.bind(this), this.updateInterval);
-	this.updateCurrentWeather();
+	//this.updateCurrentWeather();
 	this.updateWeatherForecast();
 	
 }
