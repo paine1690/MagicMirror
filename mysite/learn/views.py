@@ -2,6 +2,7 @@
 #coding:utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
 import time
 
 i=0;
@@ -23,8 +24,12 @@ def pictrue(request):
 def polling(request):
     #string = u"polling";
     string=GetNowTime();
+    result = {
+        'time': string,
+        'mode': 2,
+	}
     print(string);
-    return HttpResponse(string);	
+    return HttpResponse(json.dumps(result), content_type='application/json');	
     	
     
 	

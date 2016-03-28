@@ -5,8 +5,12 @@
 </head>
 
 <body>
+	{% include 'polling.html' %}
 	<script src="{{STATIC_URL}}js/jquery-2.1.1.min.js"></script>
 	<script src="{{STATIC_URL}}js/pictrue/vegas.min.js"></script>
 	<script src="{{STATIC_URL}}js/pictrue/theme.js"></script>
+	<script>
+		polling.init(2);
+	</script>
 </body>
 </html>

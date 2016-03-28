@@ -43,7 +43,7 @@ var weather = {
 	apiBase: 'http://api.openweathermap.org/data/',
 	weatherEndpoint: 'weather',
 	forecastEndpoint: 'forecast/',
-	updateInterval: 6000,
+	updateInterval: 60000,
 	fadeInterval: config.weather.fadeInterval || 1000,
 	intervalId: null,
 	orientation: config.weather.orientation || 'vertical',
