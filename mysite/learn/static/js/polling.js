@@ -17,7 +17,7 @@ polling.update = function () {
 				polling.oldMode=2;
 				window.location.href='http://localhost:8000/pictrue';
 			}
-            $('#test').html(result.time);
+            //$('#test').html(result.time);
         })
       
 
